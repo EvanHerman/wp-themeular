@@ -74,6 +74,24 @@ function display_themeular_admin_notices() {
 				<p><span class="dashicons dashicons-dismiss"></span> <?php printf( __( '<a href="%s" target="_blank" title="WP REST API">WP REST API</a> ( version 2.0 or greater ) must be installed and active for WP Themeular to function properly. Please install the <a href="%s" target="_blank" title="WP REST API">WP REST API</a> plugin before continuing.', 'wp-themeular' ), esc_url( 'https://wordpress.org/plugins/rest-api/' ), esc_url( 'https://wordpress.org/plugins/rest-api/' ) ); ?></p>
 			</div>
 		<?php
+	} else { // confirm that the version is 2.0-beta3 ... This should versions without the -beta3 extension
+		$rest_plugin_data = get_plugin_data( trailingslashit( WP_PLUGIN_DIR ) . 'rest-api/plugin.php' );
+		if( isset( $rest_plugin_data['Version'] ) ) {
+			$version = explode( '-', $rest_plugin_data['Version'] );
+			if( count( $version ) > 1 ) {
+				$ver_check = $version[0];
+			} else {
+				$ver_check = $rest_plugin_data['Version'];
+			}
+			// if the installed version is less than 2.0, throw that error
+			if( (int) $ver_check < '2.0' ) {
+				?>
+				<div class="error">
+					<p><span class="dashicons dashicons-dismiss"></span> <?php printf( __( '<a href="%s" target="_blank" title="WP REST API">WP REST API</a> ( version 2.0 or greater ) must be installed and active for WP Themeular to function properly. Please install the <a href="%s" target="_blank" title="WP REST API">WP REST API</a> plugin before continuing.', 'wp-themeular' ), esc_url( 'https://wordpress.org/plugins/rest-api/' ), esc_url( 'https://wordpress.org/plugins/rest-api/' ) ); ?></p>
+				</div>
+				<?php
+			}
+		}
 	}
 }
 add_action( 'admin_notices', 'display_themeular_admin_notices' ); 

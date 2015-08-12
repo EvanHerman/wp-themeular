@@ -1,3 +1,8 @@
+To preview these themes, please visit:
+http://bootswatch.com/
+
+How To:
+=============
 To swap themes, simply replace the current bootstrap-theme_name.css file in 'wp-content/themes/themeular/lib/public/css' with any of the themes found in this directory.
 
 Steps to switch themes:
