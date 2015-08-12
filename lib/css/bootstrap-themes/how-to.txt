@@ -1,0 +1,6 @@
+To swap themes, simply replace the bootstrap.css file in 'wp-content/themes/themeular/css' with any of the themes found in this directory.
+
+Steps to switch themes:
+1) Move bootstrap.css from 'wp-content/themes/themeular/css' to 'wp-content/themes/themeular/css/bootstrap-themes/'
+2) Move newly selected theme from 'wp-content/themes/themeular/css/bootstrap-themes/' to 'wp-content/themes/themeular/css'
+3) Run grunt (to recompile the styles as needed)
