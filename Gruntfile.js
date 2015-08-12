@@ -8,23 +8,35 @@ module.exports = function(grunt) {
 			  separator: ';\n',
 			  options: 'block',
 			},
-			scripts: {
-			  src: ['lib/js/*.js'],
-			  dest: 'lib/build/themeular.js',
+			public_scripts: {
+			  src: ['lib/public/js/*.js'],
+			  dest: 'lib/build/public/themeular.js',
 			},
-			styles: {
-			  src: ['lib/css/*.css'],
-			  dest: 'lib/build/themeular.css',
+			public_styles: {
+			  src: ['lib/public/css/*.css'],
+			  dest: 'lib/build/public/themeular.css',
 			},
+			admin_scripts: {
+				src: ['lib/admin/js/*.js'],
+				dest: 'lib/build/admin/admin-themeular.js',
+			},
+			admin_styles: {
+				src: ['lib/admin/css/*.css'],
+				dest: 'lib/build/admin/admin-themeular.css',
+			}
 		  },
 	
         // js minification
         uglify: {
             dist: {
                 files: {
-					// admin scripts
-                    'lib/build/min/themeular.min.js': [ // main theme scripts
-                        'lib/build/themeular.js'
+					// Public scripts
+                    'lib/build/public/min/themeular.min.js': [ // main theme scripts
+                        'lib/build/public/themeular.js'
+                    ],
+					// Admin scripts
+                    'lib/build/admin/min/admin-themeular.min.js': [ // main theme scripts
+                        'lib/build/admin/admin-themeular.js'
                     ],
                 }
             }
@@ -41,7 +53,7 @@ module.exports = function(grunt) {
                 ]
             },
 			dist: {
-			  src: [ 'lib/css/*.css' ]
+			  src: [ 'lib/public/css/*.css' ]
 			}
 		},
 		
@@ -49,14 +61,24 @@ module.exports = function(grunt) {
 		cssmin: {
 			target: {
 				files: [
-					// admin css files
+					// Public css files
 					{
 						expand: true,
-						cwd: 'lib/build',
+						cwd: 'lib/build/public',
 						src: [
 							'themeular.css',
 						], // main style declaration file
-						dest: 'lib/build/min',
+						dest: 'lib/build/public/min',
+						ext: '.min.css'
+					},
+					// Admin css files
+					{
+						expand: true,
+						cwd: 'lib/build/admin',
+						src: [
+							'admin-themeular.css',
+						], // main style declaration file
+						dest: 'lib/build/admin/min',
 						ext: '.min.css'
 					}
 				]
@@ -65,8 +87,24 @@ module.exports = function(grunt) {
 
         // watch our project for changes
        watch: {
+			public_css: { // admin css
+				files: 'lib/public/css/*.css',
+				tasks: ['concat','postcss','cssmin'],
+				options: {
+					spawn:false,
+					event:['all']
+				},
+			},
+			public_js: { // admin js
+				files: 'lib/public/js/*.js',
+				tasks: ['concat','uglify'],
+				options: {
+					spawn:false,
+					event:['all']
+				},
+			},
 			admin_css: { // admin css
-				files: 'lib/css/*.css',
+				files: 'lib/admin/css/*.css',
 				tasks: ['concat','postcss','cssmin'],
 				options: {
 					spawn:false,
@@ -74,7 +112,7 @@ module.exports = function(grunt) {
 				},
 			},
 			admin_js: { // admin js
-				files: 'lib/js/*.js',
+				files: 'lib/admin/js/*.js',
 				tasks: ['concat','uglify'],
 				options: {
 					spawn:false,
@@ -86,7 +124,7 @@ module.exports = function(grunt) {
 		// Borwser Sync
 		browserSync: {
 			bsFiles: {
-				src : [ 'lib/build/*.min.css', 'lib/build/*.min.js' ],
+				src : [ 'lib/build/public/min/*.min.css', 'lib/build/public/min/*.min.js', 'lib/build/admin/min/*.min.css', 'lib/build/admin/min/*.min.js' ],
 			},
 			options: {
 				proxy: "localhost/wp-themeular/",
