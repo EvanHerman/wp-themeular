@@ -1,11 +1,45 @@
 <div class="container" ng-controller="PageCtrl">
 	<div class="row">
+	
         <div class="col-lg-12">
-				
 			<h2 ng-bind-html="page_data.title.rendered"></h2>	
-				
-			<p ng-bind-html="page_data.content.rendered"></p>
-						
+			<p ng-bind-html="page_data.content.rendered"></p>					
 		</div>
+		
+		<!-- Edit/Delete Post Buttons -->
+		<div ng-switch on="user_authenticated.data">
+			<div ng-switch-when="1">
+				<div class="manage-post-container col-lg-12">
+					<div class="col-lg-2 col-md-2">
+						<a href="#" onclick="return false;" data-toggle="modal" data-target="#myModal" class="btn btn-success col-lg-12"><i class="fa fa-pencil-square-o"></i> Edit Post</a>
+					</div>
+					<div class="col-lg-2 col-md-2">
+						<a href="#" onclick="return false;" data-toggle="modal" data-target="#myModal" class="btn btn-danger col-lg-12"><i class="fa fa-trash-o"></i> Delete Post</a>
+					</div>
+				</div>
+			</div>
+		</div>
+			
 	</div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>

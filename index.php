@@ -23,7 +23,7 @@
 	
 <body <?php body_class(); ?> ng-app="tutorialWebApp">
 <!-- Our Website Content Goes Here -->
-<div ng-include='"<?php echo get_template_directory_uri(); ?>/templates/header.php"' <?php if( current_user_can( 'manage_options' ) ) { echo 'class="logged-in-navbar"'; } ?>></div>
+<div ng-include='"<?php echo get_template_directory_uri(); ?>/templates/header.html"' <?php if( current_user_can( 'manage_options' ) ) { echo 'class="logged-in-navbar"'; } ?>></div>
 <div ng-view></div>
 <div ng-include='"<?php echo get_template_directory_uri(); ?>/templates/footer.html"'></div>
 

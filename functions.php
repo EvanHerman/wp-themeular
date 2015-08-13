@@ -38,6 +38,7 @@ function themeular_enqueue_scripts_and_styles() {
 	wp_localize_script( 'main.js', 'themeularData', array(
 		'root' => trailingslashit( get_template_directory_uri() ),
 		'site_url' => trailingslashit( get_bloginfo( 'wpurl' ) . '/wp-json' ),
+		'ajax_url' => admin_url( 'admin-ajax.php' ),
 		'nonce' => wp_create_nonce( 'wp_rest' )
 	) );
 }
@@ -59,6 +60,8 @@ if ( ! function_exists( '_themeular_theme_setup' ) ) {
 		foreach ( glob( get_template_directory() . '/lib/api-endpoint-extensions/*.php' ) as $filename ) {
 			include $filename;
 		}
+		// Include all of our ajax handlers
+		require_once get_template_directory() . '/lib/ajax_controls.php';
 	}
 }
 add_action( 'after_setup_theme', '_themeular_theme_setup' );
