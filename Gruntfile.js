@@ -139,7 +139,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-postcss'); // CSS autoprefixer plugin (cross-browser auto pre-fixes)
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.loadNpmTasks('grunt-browser-sync'); // browser-sync auto refresh
+	// grunt.loadNpmTasks('grunt-browser-sync'); // browser-sync auto refresh
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	
     // register task
@@ -147,9 +147,7 @@ module.exports = function(grunt) {
 		'concat',
 		'uglify',
 		'postcss',
-        'cssmin',
-		'browserSync',
-        'watch',
+        'cssmin'
     ]);
 
 };

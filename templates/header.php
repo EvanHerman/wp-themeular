@@ -1,4 +1,6 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="navCtrl">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -13,18 +15,12 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/services">Services</a>
-                </li>
-                <li><a href="#/pricing">Pricing Table</a>
-                </li>
-                <li><a href="#/about">About</a>
-                </li>
-                <li><a href="#/faq">FAQ</a>
-                </li>
-                <li><a href="#/contact">Contact</a>
-                </li>
-                <li class="dropdown">
+            <ul class="nav navbar-nav navbar-right" ng-repeat="menu_item in menu_items | reverseOrder" ng-switch on="menu_item.object">
+				
+				<li ng-switch-when='custom'><a href="{{menu_item.url}}" title="{{menu_item.attr}}"}><i class="{{menu_item.icon_class}}"></i> {{menu_item.title}}</a></li>
+				<li ng-switch-when='page'><a href="#/{{menu_item.object}}/{{menu_item.object_id}}" title="{{menu_item.attr}}"><i class="{{menu_item.icon_class}}"></i> {{menu_item.title}}</a></li>
+                
+				<!-- <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#/blog">List of Posts</a>
@@ -32,7 +28,8 @@
                         <li><a href="#/blog/post">View One Post</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
+				
             </ul>
         </div>
         <!-- /.navbar-collapse -->

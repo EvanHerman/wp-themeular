@@ -29,19 +29,19 @@
 		public function register_routes() {
 			
 			/*
-			* 	Endpoint: wp-reaction/v1/menus/
+			* 	Endpoint: wp-themeular/v1/menus/
 			* 	Description: Returns all registered menus on site
 			*/
-			register_rest_route( 'wp-reaction/v1', '/menus', array(
+			register_rest_route( 'wp-themeular/v1', '/menus', array(
 				'methods' => 'GET',
 				'callback' => array( $this, 'get_menus' ),
 			) );
 			
 			/*
-			*	Endpoint: wp-reaction/v1/menu/@menu-id
+			*	Endpoint: wp-themeular/v1/menu/@menu-id
 			* 	Description: Return a specific menu by ID
 			*/
-			register_rest_route( 'wp-reaction/v1', '/menu/(?P<id>\d+)', array(
+			register_rest_route( 'wp-themeular/v1', '/menu/(?P<id>\d+)', array(
 				'methods' => 'GET',
 				'callback' => array( $this, 'get_menu' ),
 				'args' => array(
@@ -52,19 +52,19 @@
 			) );
 			
 			/*
-			* 	Endpoint: wp-reaction/v1/menu-locations
+			* 	Endpoint: wp-themeular/v1/menu-locations
 			* 	Description: Returns all registered menus by location
 			*/
-			register_rest_route( 'wp-reaction/v1', '/menu-locations', array(
+			register_rest_route( 'wp-themeular/v1', '/menu-locations', array(
 				'methods' => 'GET',
 				'callback' => array( $this, 'get_menu_locations' ),
 			) );
 			
 			/*
-			* 	Endpoint: wp-reaction/v1/menu-location/location
+			* 	Endpoint: wp-themeular/v1/menu-location/location
 			* 	Description: Returns a specific menu by location slug (eg: main_nav)
 			*/
-			register_rest_route( 'wp-reaction/v1', '/menu-location/(?<location>\w+)', array(
+			register_rest_route( 'wp-themeular/v1', '/menu-location/(?<location>\w+)', array(
 				'methods' => 'GET',
 				'callback' => array( $this, 'get_menu_location' ),
 				'args' => array(
@@ -186,7 +186,7 @@
 		 * @param  string $location The theme location menu name
 		 * @return array The menu for the corresponding location
 		 */
-		public function get_menu_location( $data ) {
+		public static function get_menu_location( $data ) {
 			$location = $data['location'];
 			$locations = get_nav_menu_locations();
 			if ( ! isset( $locations[$location] ) )
@@ -211,13 +211,13 @@
 
 				$i = 0;
 				foreach( $top_level_menu_items as $top_item ) :
-					$menu[$i] = $this->format_menu_item( $top_item, false );
+					$menu[$i] = self::format_menu_item( $top_item, false );
 					/*
 					*	Assign custom font awesome icon
 					*/
 					$menu[$i]['icon_class'] = 'fa ' . $top_item->icon_class;
 					if ( isset( $menu_items_with_children[$top_item->ID] ) )
-						$menu[$i]['children'] = $this->get_nav_menu_item_children( $top_item->ID, $menu_items, false );
+						$menu[$i]['children'] = self::get_nav_menu_item_children( $top_item->ID, $menu_items, false );
 					else
 						$menu[$i]['children'] = array();
 
