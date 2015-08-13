@@ -21,7 +21,7 @@ To swap default themes styles, simply replace the bootstrap-superhero.css file i
 
 Steps to switch themes:
 
-1. Move bootstrap-theme_name.css from `wp-themeular/lib/public/css` to `wp-themeular/lib/public/css/bootstrap-themes/`
+1. Move `bootstrap-theme_name.css` from `wp-themeular/lib/public/css` to `wp-themeular/lib/public/css/bootstrap-themes/`
 2. Move newly selected theme from `wp-themeular/lib/public/css/bootstrap-themes/` to `wp-themeular/lib/public/css`
 3. Run `$ grunt` (to recompile the styles as needed)
 
