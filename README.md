@@ -20,11 +20,12 @@ $ grunt
 To swap default themes styles, simply replace the bootstrap-superhero.css file in 'wp-content/themes/themeular/css' with any of the themes found in 'wp-content/themes/themeular/css/bootstrap-themes/'.
 
 Steps to switch themes:
-1) Move bootstrap.css from 'wp-content/themes/themeular/css' to 'wp-content/themes/themeular/css/bootstrap-themes/'
-2) Move newly selected theme from 'wp-content/themes/themeular/css/bootstrap-themes/' to 'wp-content/themes/themeular/css'
-3) Run grunt (to recompile the styles as needed)
+
+1. Move bootstrap-theme_name.css from `wp-themeular/lib/public/css` to `wp-themeular/lib/public/css/bootstrap-themes/`
+2. Move newly selected theme from `wp-themeular/lib/public/css/bootstrap-themes/` to `wp-themeular/lib/public/css`
+3. Run `$ grunt` (to recompile the styles as needed)
 
 
 ##### To Do:
-* Setup custom menu management and power it via Angular.js
+* Work on child menu items in the main_nav
 * Prepare for WP REST API  v2
