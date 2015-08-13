@@ -28,4 +28,6 @@ Steps to switch themes:
 
 ##### To Do:
 * Work on child menu items in the main_nav
-* Prepare for WP REST API  v2
+* Work on edit/delete functionality
+* Expose widget route endpoint via REST API
+* Work on some form of theme settings page (preferably via customizer)
