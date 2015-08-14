@@ -1,11 +1,32 @@
 <div class="container" ng-controller="PageCtrl">
 	<div class="row">
 	
-        <div class="col-lg-12">
-			<h2 ng-bind-html="page_data.title.rendered"></h2>	
-			<p ng-bind-html="page_data.content.rendered"></p>					
+        <div class="col-lg-12 article">
+			<h2 ng-bind-html="page_data.title.rendered" property="title"></h2>	
+			<p ng-bind-html="page_data.content.rendered" property="content"></p>			
 		</div>
 		
+		<div xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:dcterms="http://purl.org/dc/terms/" about="http://example.net/blog/" rel="dcterms:hasPart" rev="dcterms:partOf">
+			  <article typeof="sioc:Post" about="http://example.net/blog/news_item">
+				<h1 property="dcterms:title">News item title</h1>
+				<div property="dcterms:author">Henri Bergius</div>
+				<div property="sioc:content">
+				  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+				  <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
+				</div>
+				<ul rel="skos:related">
+				  <li about="urn:tag:Foo" property="rdfs:label">Foo</a>
+				</ul>
+			  </article>
+			  <article typeof="sioc:Post" about="http://example.net/blog/second_news_item">
+				<h1 property="dcterms:title">Another item</h1>
+				<div property="sioc:content">
+				  <p>Hello, world!</p>
+				</div>
+			  </article>
+		</div>
+	
+	
 		<!-- Edit/Delete Post Buttons -->
 		<div ng-switch on="user_authenticated.data">
 			<div ng-switch-when="1">
@@ -14,7 +35,7 @@
 						<a href="#" onclick="return false;" data-toggle="modal" data-target="#myModal" class="btn btn-success col-lg-12"><i class="fa fa-pencil-square-o"></i> Edit Post</a>
 					</div>
 					<div class="col-lg-2 col-md-2">
-						<a href="#" onclick="return false;" data-toggle="modal" data-target="#myModal" class="btn btn-danger col-lg-12"><i class="fa fa-trash-o"></i> Delete Post</a>
+						<a class="btn btn-danger col-lg-12" ng-click="deletePage( $scope.page_data.id, 'Delete Page?', 'Are you sure you want to delete this page?', 'warning', post);"><i class="fa fa-trash-o"></i> Delete Post</a>
 					</div>
 				</div>
 			</div>
